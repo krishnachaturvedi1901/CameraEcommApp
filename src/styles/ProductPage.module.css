@@ -1,0 +1,52 @@
+
+.productPageMainDiv{
+    display: flex;
+    width: 100%;
+}
+/* --------------------Sorting and Filter Main Div------------------ */
+
+.sortingFilterDiv{
+    border: 1px solid purple;
+    width: 20%;
+}
+
+/*-------------------- Search Pagination Products Main div------------ */
+
+.productsPageSearchDiv{
+    border: 1px solid violet;
+    width: 80%;
+    margin: auto;
+}
+
+/* -----------------------------Pagination--------------------------- */
+
+.paginationDiv{
+    display: flex;
+    max-width: max-content;
+    align-items: center;
+    padding: 15px;
+    margin: auto;
+    border: 1px solid blue;
+}
+
+/*-----------------------Display All Products ---------------------  */
+
+.productsDiv{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-gap: 40px;
+    padding: 15px;
+    border: 1px solid red;
+}
+.oneProductDiv{
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px gainsboro;
+}
+.oneProductDiv:hover{
+    box-shadow: 5px 5px 4px gainsboro;
+    cursor: pointer;
+}
+.oneProductDiv>p>span{
+    text-decoration: line-through;
+}

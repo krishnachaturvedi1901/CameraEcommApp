@@ -1,0 +1,67 @@
+.pdMainDiv {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.pdImgDiv {
+  width: 50%;
+  border-right: 1px solid #cecece;
+  margin-right: 40px;
+  padding: 20px;
+}
+.pdImgDiv > img {
+    width: 80%;
+  height: 40vw;
+}
+
+.pdAllDetailDiv{
+    width: 40%;
+    text-align: start;
+    padding: 20px;
+}
+.pdTableDiv>h3{
+    text-decoration: underline;
+    
+}
+.pdTableDiv>table>tbody>tr>th{
+    text-align: start;
+}
+.pdMrpDiv>p>span{
+    text-decoration: line-through;
+}
+.pdWishlistCartButtonDiv>button{
+    padding: 10px;
+    border-radius: 4px;
+    background-color: crimson;
+    border: none;
+    font-size: 18px;
+    margin-right: 40px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+.pdWishlistCartButtonDiv>button:hover{
+    box-shadow: 1px 1px 0px rgb(152, 97, 97);
+}
+@media screen and (max-width: 600px) {
+  .pdMainDiv {
+    display: block;
+  }
+  .pdImgDiv {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid #cecece;
+  }
+  .pdImgDiv > img {
+    height: 80%;
+    width: 80%;
+  }
+  .pdAllDetailDiv{
+    width: 100%;
+    text-align: start;
+    padding: 20px;
+    font-size: 1em;
+}
+
+  
+}
