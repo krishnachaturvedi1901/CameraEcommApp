@@ -7,66 +7,79 @@ import Filteration from "../components/ProductPageCompo/Filteration";
 import Sorting from "../components/ProductPageCompo/Sorting";
 import Searching from "../components/ProductPageCompo/Searching";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { updatePaginationState } from "../redux/pageSortFilterState/actions";
 
 const ProductPage = () => {
+
   const dispatch = useDispatch();
   const navigate=useNavigate()
   const [searchParams,setSearchParams]=useSearchParams()
+
+
   let { loading, products, totalProducts, error } = useSelector((state) => state.ProductState);
   let paginationState = useSelector((state) => state.PaginationState);
   let sortingState = useSelector((state) => state.SortingState); 
   let searchingState = useSelector((state) => state.SearchingState);
   let filteringState=useSelector((state)=>state.FilteringState)
+  
+  // console.log("-------->", products, totalProducts);
+  // console.log("---->paginationState", paginationState);
+  // console.log("---->sortingState", sortingState);
+  // console.log("---->searchingState", searchingState);
+  // console.log("---->filteringState", filteringState);
 
+  let {_page,_limit}=paginationState
   let {brand,feature}=filteringState
-  console.log("-------->", products, totalProducts);
-  console.log("---->paginationState", paginationState);
-  console.log("---->sortingState", sortingState);
-  console.log("---->searchingState", searchingState);
-  console.log("---->filteringState", filteringState);
-
- const obj={
-  sort:null,
-  loot:null
- }
- console.log("testing-",obj)
- console.log("testing loot -", obj.loot)
- if(obj)  console.log("testing-",obj)
-if(obj.loot) console.log("testing loot -", obj.loot)
-
-
-
-  useEffect(() => {
-    dispatch(fetchProducts(paginationState));
-  }, []);
+  let {_sort,_order}=sortingState
+  let {q}=searchingState
 
   useEffect(() => {
     dispatch(fetchProducts({...paginationState,...sortingState,...searchingState,...filteringState}));
+
   }, [paginationState,sortingState,searchingState,filteringState]);
 
+   
+  // useEffect(() => {
+  //   let page = +searchParams.get("_page");
+  //   if (!isNaN(page) && page > 0) {
+  //     dispatch(updatePaginationState({ _page: page, _limit:14 }));
+  //   }
+  // }, [_page, searchParams, dispatch]);
+
   useEffect(()=>{
-    if(brand && feature && sortingState._sort ){
-      setSearchParams({...paginationState,...filteringState,...sortingState})
+       
+    const updateUrl=()=>{
+      let param= new URLSearchParams(searchParams)
+      console.log("****Param*******-",param,_page)
+      if(_page){
+        param.set("_page",_page)
+        param.set("_limit",_limit)
+      }
+
+      if(_sort){
+        param.set('_sort',_sort)
+        param.set('_order',_order)
+      }else{
+        param.delete("_sort")
+        param.delete("_order")
+      } 
+
+      if(brand) param.set('brand',brand)
+      else param.delete("brand")
+
+      if(feature) param.set('feature',feature)
+      else param.delete("feature")
+
+      if(q)param.set("q",q)
+      else param.delete("q")
+      
+      setSearchParams(param.toString())
+      
     }
-    else if(brand && feature ){
-      setSearchParams({...paginationState,...filteringState})
-    }
-    else if(sortingState._sort){
-      setSearchParams({...paginationState,...sortingState})
-    }
-    else if(brand){
-      setSearchParams({...paginationState,brand})
-    }
-    else if(feature){
-      setSearchParams({...paginationState,feature})
-    }
-    else if(paginationState){
-      setSearchParams(paginationState)
-    }
-    
+    updateUrl()
+
   },[paginationState,sortingState,searchingState,filteringState])
 
-console.log("searchParam-->",searchParams)
 
   if (loading) {
     return <h2>Loading ...</h2>;
