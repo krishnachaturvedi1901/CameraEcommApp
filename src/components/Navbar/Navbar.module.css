@@ -1,0 +1,30 @@
+.navDiv{
+    margin: 0;
+    position: fixed;
+    z-index: 1;
+    height: 60px;
+    width: 100%;
+    background-color: darkslategray;
+    color:whitesmoke;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.navSubDiv{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.navListing{
+    color:whitesmoke ;
+    text-decoration: none;
+    font-weight: 700;
+}
+#cartButton{
+    height: 42px;
+    width: 42px;
+    background-color: transparent;
+    border: none;
+}
