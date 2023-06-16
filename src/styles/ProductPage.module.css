@@ -38,15 +38,37 @@
     padding: 15px;
     border: 1px solid red;
 }
-.oneProductDiv{
-    border: 1px solid gainsboro;
-    border-radius: 4px;
-    box-shadow: 2px 2px 2px gainsboro;
+
+.oneProductDivAndCartBtnDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px gainsboro;
+
 }
-.oneProductDiv:hover{
+
+.oneProductDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.oneProductDivAndCartBtnDiv:hover{
     box-shadow: 5px 5px 4px gainsboro;
     cursor: pointer;
 }
 .oneProductDiv>p>span{
     text-decoration: line-through;
+}
+#cartBtn{
+    width: 100%;
+    padding: 7px;
+    background-color: darkslategray;
+    border: none;
+    cursor: pointer;
+}
+#cartBtn:hover{
+    background-color:rgb(40, 65, 65) ;
 }
