@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productPageState/actions";
 import styles from "../styles/ProductPage.module.css";
@@ -9,8 +9,11 @@ import Searching from "../components/ProductPageCompo/Searching";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { updatePaginationState } from "../redux/pageSortFilterState/actions";
 import { GiShoppingCart } from "react-icons/gi";
+import ScrollToTopBtn from "../components/ProductPageCompo/ScrollToTopBtn";
+import { YaxisContext } from "../context/WindowYaxisContext";
 
 const ProductPage = () => {
+  const {ycordinates}=useContext(YaxisContext)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -130,6 +133,7 @@ const ProductPage = () => {
               })
             : null}
         </div>
+       {ycordinates!==0?<ScrollToTopBtn/>:null} 
       </div>
     </div>
   );

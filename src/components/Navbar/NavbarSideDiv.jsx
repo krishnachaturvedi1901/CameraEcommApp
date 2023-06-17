@@ -20,11 +20,6 @@ const NavbarSideDiv = () => {
           Products
         </Link>
       </div>
-      <div>
-        <Link to={"/cart"} className={styles.navListing} >
-          Cart
-        </Link>
-      </div>
     </div>
   );
 };

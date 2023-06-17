@@ -5,9 +5,12 @@ import AllRoutes from "./routes/AllRoutes";
 import { NavSidedivContext } from "./context/NavSidedivContext";
 import NavbarSideDiv from "./components/Navbar/NavbarSideDiv";
 import { WindowWidthContext } from "./context/WindowWidthContext";
+import { CartDivContext } from "./context/CartSideDivContext";
+import Cart from "./pages/Cart";
 
 function App() {
   const { navDiv, toggleNavDivOpening } = useContext(NavSidedivContext);
+  const {cartIsOpen}=useContext(CartDivContext)
   const { windowWidth } = useContext(WindowWidthContext);
 
   return (
@@ -16,6 +19,7 @@ function App() {
       {navDiv && windowWidth <= 500 ? (
           <NavbarSideDiv/>
       ) : null}
+      {cartIsOpen?<Cart/>:null}
       <AllRoutes />
     </div>
   );

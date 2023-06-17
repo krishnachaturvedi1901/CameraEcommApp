@@ -1,0 +1,10 @@
+.cartMainDiv{
+    height: 100%;
+    width: 40%;
+    padding-top: 40px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: rgb(61, 92, 92);
+    z-index: 0;
+}

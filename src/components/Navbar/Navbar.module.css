@@ -27,4 +27,24 @@
     width: 42px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
+.navHamMainDiv{
+    margin: 0;
+    position: fixed;
+    z-index: 1;
+    height: 60px;
+    width: 100%;
+    background-color: darkslategray;
+    color:whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.navHamburgerDiv{
+  margin-left: 20px;
+}
+.navHamburgerDiv>svg:hover{
+   cursor: pointer;
+}  

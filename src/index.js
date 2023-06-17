@@ -7,17 +7,23 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import NavSidedivContextProvider from './context/NavSidedivContext';
 import WindowWidthContextProvider from './context/WindowWidthContext';
+import WindowYaxisContextProvider from './context/WindowYaxisContext';
+import CartSideDivContextProvider from './context/CartSideDivContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store} >
+  <WindowYaxisContextProvider>
   <WindowWidthContextProvider>
+  <CartSideDivContextProvider>
   <NavSidedivContextProvider>
   <BrowserRouter>
    <App />
   </BrowserRouter>
   </NavSidedivContextProvider>
+  </CartSideDivContextProvider>
   </WindowWidthContextProvider>
+  </WindowYaxisContextProvider>
   </Provider>
   
 );
