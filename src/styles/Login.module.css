@@ -1,0 +1,22 @@
+.loginSignupDiv{
+   display: flex;
+   padding: 80px 20px 20px;
+   justify-content: space-around;
+}
+.loginDiv{
+    text-align: start;
+    margin-right: 20px;
+    max-width: 45%;
+}
+.signupDiv{
+    padding-top: 60px;
+    text-align: start;
+    max-width: 45%;
+}
+
+@media screen and (max-width:500px) {
+    .loginSignupDiv{
+        display: block;
+     }
+     
+}

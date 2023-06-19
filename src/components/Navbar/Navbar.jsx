@@ -1,36 +1,83 @@
-import React, { useEffect, useState } from 'react'
-import styles from "./Navbar.module.css"
-import { Link } from 'react-router-dom'
-import {GiShoppingCart} from "react-icons/gi"
-import {FaHamburger} from "react-icons/fa"
-import { useContext } from 'react'
-import { NavSidedivContext } from '../../context/NavSidedivContext'
-import { WindowWidthContext } from '../../context/WindowWidthContext'
-import { CartDivContext } from '../../context/CartSideDivContext'
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./Navbar.module.css";
+import { Link } from "react-router-dom";
+import { GiShoppingCart } from "react-icons/gi";
+import {GiHamburgerMenu} from "react-icons/gi"
+import { FaHamburger } from "react-icons/fa";
+import { BsCartX } from "react-icons/bs";
+import { BsCartCheck } from "react-icons/bs";
+import { useContext } from "react";
+import { NavSidedivContext } from "../../context/NavSidedivContext";
+import { WindowWidthContext } from "../../context/WindowWidthContext";
+import { CartDivContext } from "../../context/CartSideDivContext";
 
 const Navbar = () => {
-  const {toggleNavDivOpening}=useContext(NavSidedivContext)
-  const {toggleCartOpening}=useContext(CartDivContext)
-  const {windowWidth}=useContext(WindowWidthContext)
-  
-  return (
-    
-  windowWidth<=500?
-    <div className={styles.navHamMainDiv} >
-        <div onClick={()=>toggleNavDivOpening()} className={styles.navHamburgerDiv} ><FaHamburger size={20} /></div>
-        <button id={styles.cartButton}  onClick={()=>toggleCartOpening()} ><GiShoppingCart size={30} color='white' /></button>
-    </div>
-    :
-    <div className={styles.navDiv} >
-        <div className={styles.navSubDiv} >
-            <div><Link to={'/'} className={styles.navListing} >Home</Link></div>
-            <div><Link to={'/products'} className={styles.navListing} >Products</Link></div>
-            <div><Link to={'/login'} className={styles.navListing} >Login</Link></div>
-            <button id={styles.cartButton} onClick={()=>toggleCartOpening()} ><GiShoppingCart size={30} color='white' /></button>
-        </div>
-    </div>
-   
-  )
-}
+  const { toggleNavDivOpening } = useContext(NavSidedivContext);
+  const { cartIsOpen, toggleCartOpening } = useContext(CartDivContext);
+  const { windowWidth } = useContext(WindowWidthContext);
+  const {navDiv} =useContext(NavSidedivContext)
 
-export default Navbar
+  const handleCartOpening = () => {
+    console.log("cartIsopen chek in navbar", cartIsOpen);
+    if (!cartIsOpen) {
+      toggleCartOpening();
+    }
+  };
+
+  return windowWidth <= 500 ? (
+    <div className={styles.navHamMainDiv}>
+      {!navDiv?<div
+        onClick={() => toggleNavDivOpening()}
+        className={styles.navHamburgerDiv}
+      >
+        <FaHamburger size={20} />
+      </div>:
+      <div
+       className={styles.navHamburgerDiv}
+      >
+       <GiHamburgerMenu size={20} />
+      </div>
+      }
+      {!cartIsOpen ? (
+        <button id={styles.cartButton} onClick={() => handleCartOpening()}>
+          <BsCartCheck size={24} color="white" />
+        </button>
+      ) : (
+        <button id={styles.cartButton}>
+          <BsCartX size={24} color="white" />
+        </button>
+      )}
+    </div>
+  ) : (
+    <div className={styles.navDiv}>
+      <div className={styles.navSubDiv}>
+        <div>
+          <Link to={"/"} className={styles.navListing}>
+            Home
+          </Link>
+        </div>
+        <div>
+          <Link to={"/products"} className={styles.navListing}>
+            Products
+          </Link>
+        </div>
+        <div>
+          <Link to={"/login"} className={styles.navListing}>
+            Login
+          </Link>
+        </div>
+        {!cartIsOpen ? (
+          <button id={styles.cartButton} onClick={() => handleCartOpening()}>
+            <BsCartCheck size={24} color="white" />
+          </button>
+        ) : (
+          <button id={styles.cartButton}>
+            <BsCartX size={24} color="white" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

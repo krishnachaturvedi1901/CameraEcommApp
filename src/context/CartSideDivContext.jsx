@@ -12,7 +12,7 @@ const CartSideDivContextProvider = ({ children }) => {
   };
   console.log("cartIsOpen", cartIsOpen);
   return (
-    <CartDivContext.Provider value={{ cartIsOpen, toggleCartOpening }}>
+    <CartDivContext.Provider value={{ cartIsOpen, toggleCartOpening}}>
       {children}
     </CartDivContext.Provider>
   );

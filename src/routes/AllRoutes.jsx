@@ -5,7 +5,7 @@ import ProductDetail from '../pages/ProductDetail'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
-import Cart from '../pages/Cart'
+import Signup from '../pages/Signup'
 
 const AllRoutes = () => {
   // let routes=useRoutes([
@@ -17,7 +17,7 @@ const AllRoutes = () => {
         <Route path='/login' element={<Login/>} />
         <Route path='/products' element={<ProductPage/>} />
         <Route path='/productDetail/:id' element={<ProductDetail/>} />
-        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/signup' element={<Signup/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
   )
