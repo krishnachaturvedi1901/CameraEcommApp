@@ -25,7 +25,9 @@ const Login = () => {
         </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">
-            Email
+            Email:
+          </label>
+          <br />
             <input
               type="email"
               id="email"
@@ -34,10 +36,10 @@ const Login = () => {
               required
               onChange={handleChange}
             />
-          </label>
-          <br />
           <label htmlFor="password">
-            Password
+            Password:
+          </label>
+          <br/>
             <input
               type="password"
               id="password"
@@ -46,8 +48,8 @@ const Login = () => {
               required
               onChange={handleChange}
             />
-          </label>
-          <button type="submit">Login</button>
+          <button id={styles.loginBtn} type="submit">Login</button>
+          <button id={styles.forgetPasswordBtn} >Forget password ?</button>
         </form>
       </div>
       <div className={styles.signupDiv}>
