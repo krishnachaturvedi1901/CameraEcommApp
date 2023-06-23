@@ -11,9 +11,10 @@ import { updatePaginationState } from "../redux/pageSortFilterState/actions";
 import { GiShoppingCart } from "react-icons/gi";
 import ScrollToTopBtn from "../components/ProductPageCompo/ScrollToTopBtn";
 import { YaxisContext } from "../context/WindowYaxisContext";
+import WishlistHeartCompo from "../components/ProductPageCompo/WishlistHeartCompo";
 
 const ProductPage = () => {
-  const {ycordinates}=useContext(YaxisContext)
+  const { ycordinates } = useContext(YaxisContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -109,7 +110,8 @@ const ProductPage = () => {
           {products
             ? products.map((prod) => {
                 return (
-                  <div className={styles.oneProductDivAndCartBtnDiv} >
+                  <div className={styles.oneProductDivAndCartBtnDiv}>
+                    <WishlistHeartCompo  id={prod.id}  />
                     <div
                       className={styles.oneProductDiv}
                       onClick={() => navigate(`/productDetail/${prod.id}`)}
@@ -122,18 +124,26 @@ const ProductPage = () => {
                       </p>
                       <h4>Offer Price: {prod.offerPrize}</h4>
                     </div>
-                    <button
-                      id={styles.cartBtn}
-                      onClick={() => console.log("CartBtn clicked")}
-                    >
-                      <GiShoppingCart size={30} color="white" />
-                    </button>
+                    <div className={styles.buyNowAndCartBtnDiv}>
+                      <button
+                        id={styles.cartBtn}
+                        onClick={() => console.log("CartBtn clicked")}
+                      >
+                        <GiShoppingCart size={30} color="white" />
+                      </button>
+                      <button
+                        id={styles.buyNowBtn}
+                        onClick={() => console.log("CartBtn clicked")}
+                      >
+                        Buy now
+                      </button>
+                    </div>
                   </div>
                 );
               })
             : null}
         </div>
-       {ycordinates!==0?<ScrollToTopBtn/>:null} 
+        {ycordinates !== 0 ? <ScrollToTopBtn /> : null}
       </div>
     </div>
   );

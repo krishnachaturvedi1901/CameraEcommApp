@@ -9,12 +9,15 @@ import NavSidedivContextProvider from './context/NavSidedivContext';
 import WindowWidthContextProvider from './context/WindowWidthContext';
 import WindowYaxisContextProvider from './context/WindowYaxisContext';
 import CartSideDivContextProvider from './context/CartSideDivContext';
+import AuthcontextProvider from './context/Authcontext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store} >
+  
   <WindowYaxisContextProvider>
   <WindowWidthContextProvider>
+  <AuthcontextProvider>
   <CartSideDivContextProvider>
   <NavSidedivContextProvider>
   <BrowserRouter>
@@ -22,6 +25,7 @@ root.render(
   </BrowserRouter>
   </NavSidedivContextProvider>
   </CartSideDivContextProvider>
+  </AuthcontextProvider>
   </WindowWidthContextProvider>
   </WindowYaxisContextProvider>
   </Provider>

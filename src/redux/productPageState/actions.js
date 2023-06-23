@@ -4,6 +4,8 @@ import {
   PRODUCTS_LOADING,
   PRODUCTS_SUCCESS,
 } from "./actionTypes";
+const productsApiUrl=process.env.REACT_APP_PRODUCTS_API_URL
+console.log("productsApiUrlproductsApiUrl-",productsApiUrl)
 
 export const productsLoading = () => ({
   type: PRODUCTS_LOADING,
@@ -41,7 +43,7 @@ function createUrl(url, { _page, _limit, _sort, _order, q, brand, feature }) {
 }
 
 export const fetchProducts = (obj) => (dispatch) => {
-  let api = createUrl("http://localhost:3001/products", obj);
+  let api = createUrl(productsApiUrl, obj);
   console.log(
     "filterSortStateObj inside fetchdata function",
     obj,

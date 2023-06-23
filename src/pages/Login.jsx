@@ -2,16 +2,29 @@ import React from "react";
 import styles from "../styles/Login.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/Authcontext";
+import { sendLoginRequest } from "../redux/LoginSignupState/actions";
+import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
+  const dispatch=useDispatch()
+  const {loading,payload,error}=useSelector((state)=>state.LoginState)
+  const {isAuth,toggleAuth}=useContext(AuthContext)
   const [authData, setAuthData] = useState({ email: "", password: "" });
+
+  console.log("login payload-",loading,payload,error)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
     setAuthData({ ...authData, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(authData);
+    console.log("login data after submit click in login",authData);
+    dispatch(sendLoginRequest(authData))
+
   };
   return (
     <div className={styles.loginSignupDiv}>
