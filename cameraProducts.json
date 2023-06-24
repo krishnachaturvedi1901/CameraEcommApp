@@ -46,7 +46,7 @@
       "sensorType": "CMOS",
       "batteryType": "Alkaline Battery",
       "lensType": "Prime",
-      "rating": 2.0
+      "rating": 2
     },
     {
       "id": 4,
@@ -158,7 +158,7 @@
       "sensorType": "CMOS",
       "batteryType": "Lithium ion (Li-ion)",
       "lensType": "Prime",
-      "rating": 3.0
+      "rating": 3
     },
     {
       "id": 11,
@@ -190,7 +190,7 @@
       "sensorType": "CMOS",
       "batteryType": "Lithium ion (Li-ion)",
       "lensType": "Prime",
-      "rating": 4.0
+      "rating": 4
     },
     {
       "id": 13,
@@ -526,7 +526,7 @@
       "sensorType": "CMOS",
       "batteryType": "Alkaline Battery",
       "lensType": "Standard",
-      "rating": 5.0
+      "rating": 5
     },
     {
       "id": 34,
@@ -970,9 +970,49 @@
       "mobile": 7355617820,
       "password": "123@kc",
       "login": false
+    },
+    {
+      "firstname": "Krishna",
+      "lastname": "Chaturvedi",
+      "email": "eve.holt@reqres.in",
+      "mobile": 7355617820,
+      "password": "aA1@abcd",
+      "re-password": "aA1@abcd",
+      "login": false,
+      "id": 2
+    },
+    {
+      "firstname": "Kc",
+      "lastname": "Chaturvedi",
+      "email": "123@gmail.com",
+      "mobile": 1234567890,
+      "password": "123@gmailCOM",
+      "login": false,
+      "re-password": "123@gmailCOM",
+      "id": 3
+    },
+    {
+      "firstname": "Andand",
+      "lastname": "Ram",
+      "email": "anand@gmail.com",
+      "mobile": 1234561234,
+      "password": "1234abcd@AB",
+      "repassword": "1234acbd@ABC",
+      "login": false,
+      "id": 4
+    },
+    {
+      "firstname": "Andand",
+      "lastname": "Ram",
+      "email": "anand@gmail.com",
+      "mobile": 1234561234,
+      "password": "1234abcd@ABC",
+      "repassword": "1234acbd@ABC",
+      "login": false,
+      "id": 5
     }
   ],
   "wishlists": [],
   "carts": [],
-  "orders":[]
+  "orders": []
 }

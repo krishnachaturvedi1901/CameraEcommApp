@@ -2,7 +2,7 @@ import { legacy_createStore , combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import ProductReducer from "./productPageState/reducer";
 import { filteringReducer, paginationReducer, searchingReducer, sortingReducer } from "./pageSortFilterState/reducer";
-import { LoginReducer } from "./LoginSignupState/reducer";
+import { LoginReducer, SignupReducer } from "./LoginSignupState/reducer";
 
 const rootReducer=combineReducers({
   ProductState:ProductReducer,
@@ -10,7 +10,8 @@ const rootReducer=combineReducers({
   SortingState:sortingReducer,
   SearchingState:searchingReducer,
   FilteringState:filteringReducer,
-  LoginState:LoginReducer
+  LoginState:LoginReducer,
+  SignupState:SignupReducer
 })
 const middlewares=applyMiddleware(thunk)
 

@@ -23,6 +23,10 @@
     margin-bottom: 15px;
     width: 70%;
 }
+#errorWarningPTag{
+    color: red;
+    margin: 10px;
+}
 .loginDiv>form>input:focus{
     outline: none;
     border-color: rgb(65, 109, 109);

@@ -1,3 +1,109 @@
+.signupAmdImgTopDiv{
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ImgDiv{
+    padding: 0px;
+    height: fit-content;
+    width: fit-content;
+}
+.ImgDiv>img{
+    width: fit-content;
+    height: 650px;
+}
 .signupMainDiv{
-    padding-top: 80px;
+    width: 60%;
+    text-align: start;
+    padding: 0px 20px;
+}
+.hrLineDiv{
+    width: 80%;
+}
+.signupMainDiv>form>input{
+    display: block;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 70%;
+}
+.signupMainDiv>form>input:focus{
+    outline: none;
+    border-color: rgb(65, 109, 109);
+}
+
+.passwordInputDiv{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 7px;
+    width: 72%;
+}
+.passwordInputDiv>input{
+    padding: 8px;
+    width: 100%;
+
+}
+.showPassEyeDiv{
+    position: absolute;
+    top: 2px;
+    left: 104%;
+}
+#signupBtn{
+    width: 73%;
+    font-size: 15px;
+    padding: 8px 20px;
+    margin: 20px 0px;
+    cursor: pointer;
+    background-color: rgb(65, 109, 109);
+    color: whitesmoke;
+    border: none;
+}
+#signupBtn:hover{
+    background-color: darkslategray;
+    opacity: 1;
+}
+
+@media screen and (max-width:1300px) {
+    .signupAmdImgTopDiv{
+        position: relative;
+        display: block;
+    }
+    
+    .signupMainDiv{
+        position: absolute;
+        width: 100%;
+        text-align: start;
+        padding: 0px 20px;
+    }   
+    .ImgDiv{
+        width: 100%;
+        overflow-y:hidden;
+        
+    }
+    .ImgDiv>img{
+        width: fit-content;
+        height: 950px;
+    }
+    
+}
+
+@media screen and (max-width:500px) {
+    .signupAmdImgTopDiv{
+        padding-top: 60px;
+        display: block;
+    }
+    
+    .signupMainDiv{
+        width: 100%;
+        text-align: start;
+        padding: 0px 20px;
+    }   
+    .ImgDiv>img{
+        width: fit-content;
+        height: 650px;
+    }
+
 }

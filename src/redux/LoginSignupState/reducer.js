@@ -1,26 +1,45 @@
-import { LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS } from "./actionTypes";
+import { LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS, SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS } from "./actionTypes";
 
 const LoginReducer = (
   state = {
-    loading: true,
+    loading: false,
     error: false,
     payload: {},
   },
-  { type, data }
+  { type, payload }
 ) => {
-    console.log("payload in side reducse",data)
   switch (type) {
     case LOGIN_LOADING:
-      return state;
+      return { ...state, loading: true, payload: {}, error: false };
     case LOGIN_SUCCESS:
-        console.log("payload in side reducse",data)
-      return { ...state, loading: false, payload: data, error: false };
+      return { ...state, loading: false, payload: payload, error: false };
     case LOGIN_ERROR:
-      return { ...state, loading: false, error: true };
+      return { ...state, loading: false, payload: {}, error: true };
 
     default:
       return state;
   }
 };
 
-export { LoginReducer };
+const SignupReducer = (
+  state = {
+    loading: false,
+    error: false,
+    payload: {},
+  },
+  { type, payload }
+) => {
+  switch (type) {
+    case SIGNUP_LOADING:
+      return { ...state, loading: true, payload: {}, error: false };
+    case SIGNUP_SUCCESS:
+      return { ...state, loading: false, payload: payload, error: false };
+    case SIGNUP_ERROR:
+      return { ...state, loading: false, payload: {}, error: true };
+
+    default:
+      return state;
+  }
+}
+
+export { LoginReducer,SignupReducer };

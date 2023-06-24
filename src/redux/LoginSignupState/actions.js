@@ -9,44 +9,45 @@ import {
 } from "./actionTypes";
 const usersApiUrl = process.env.REACT_APP_USERS_API_URL;
 
-const login_loading = () => ({
+export const login_loading = () => ({
   type: LOGIN_LOADING,
   payload: [],
 });
-const login_success = (data) => ({
-  type: LOGIN_SUCCESS,
-  payload: data,
-});
-const login_error = () => ({
+export const login_success = (data) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload: data,
+  };
+};
+export const login_error = () => ({
   type: LOGIN_ERROR,
   payload: [],
 });
 
-const signup_loading = (data) => ({
+export const signup_loading = (data) => ({
   type: SIGNUP_LOADING,
   payload: data,
 });
-const signup_success = (data) => {
-    console.log("DATA INSIDE ACTION",data)
-    return {
-  type: SIGNUP_SUCCESS,
-  payload: data,
-}};
-const signup_error = (data) => ({
+export const signup_success = (data) => {
+  return {
+    type: SIGNUP_SUCCESS,
+    payload: data,
+  };
+};
+export const signup_error = (data) => ({
   type: SIGNUP_ERROR,
   payload: data,
 });
 
 export const sendLoginRequest = (obj) => (dispatch) => {
-  console.log("getting auth data in loginReqFunc", obj);
   dispatch(login_loading());
   axios(`${usersApiUrl}?email=${obj.email}&password=${obj.password}`)
     .then((res) => {
-      if (res.data.length!=0) {
-        console.log("res after login", { ...res.data[0], password: null });
-        dispatch(login_success({ ...res.data[0], password: null }));
+      if (res.data.length != 0) {
+        const userData = { ...res.data[0], password: null };
+        dispatch(login_success(userData));
       } else {
-        console.log("login error  called");
+        console.log("user with login data not found")
         dispatch(login_error());
       }
     })
@@ -54,3 +55,16 @@ export const sendLoginRequest = (obj) => (dispatch) => {
       console.log("err after login", err);
     });
 };
+
+export const sendSignupRequest=(obj)=>(dispatch)=>{
+  dispatch(signup_loading())
+  axios.post(`${usersApiUrl}`,obj)
+  .then((res)=>{
+    console.log("res after axios post signup",res)
+    dispatch(signup_success({...res.data,password:null}))
+  })
+  .catch((err)=>{
+    console.log("err after signupreq",err)
+    dispatch(signup_error())
+  })
+}

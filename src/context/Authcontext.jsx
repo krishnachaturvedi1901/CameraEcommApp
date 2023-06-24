@@ -9,12 +9,7 @@ const AuthcontextProvider = ({children}) => {
     const [isAuth,setIsAuth]=useState(false)
 
     const toggleAuth=()=>{
-        // .then(()=>{
-        //     setIsAuth(!isAuth)
-        // })
-        // .catch(()=>{
-        //     console.log("error after login notToggling")
-        // })
+      setIsAuth(!isAuth)
     }
   return (
     <AuthContext.Provider value={{isAuth,toggleAuth}} >
