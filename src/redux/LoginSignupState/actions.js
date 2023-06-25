@@ -60,8 +60,7 @@ export const sendSignupRequest=(obj)=>(dispatch)=>{
   dispatch(signup_loading())
   axios.post(`${usersApiUrl}`,obj)
   .then((res)=>{
-    console.log("res after axios post signup",res)
-    dispatch(signup_success({...res.data,password:null}))
+    dispatch(signup_success({...res.data,password:null,repassword:null}))
   })
   .catch((err)=>{
     console.log("err after signupreq",err)

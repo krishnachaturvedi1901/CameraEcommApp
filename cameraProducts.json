@@ -1010,6 +1010,26 @@
       "repassword": "1234acbd@ABC",
       "login": false,
       "id": 5
+    },
+    {
+      "firstname": "Mohit",
+      "lastname": "Chaturvedi",
+      "email": "mohit@gmail.com",
+      "mobile": 7355782290,
+      "password": "ffd@DD123",
+      "repassword": "ffd@DD123",
+      "login": false,
+      "id": 6
+    },
+    {
+      "firstname": "Ravi",
+      "lastname": "Kumar",
+      "email": "ravi@gmail.com",
+      "mobile": 1234565780,
+      "password": "ravi123@R",
+      "repassword": "ravi123@R",
+      "login": false,
+      "id": 7
     }
   ],
   "wishlists": [],

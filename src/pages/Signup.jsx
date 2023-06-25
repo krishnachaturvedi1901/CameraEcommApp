@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Signup.module.css";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
+import { RiInformationLine } from "react-icons/ri";
 import cameraManImg from "../static/signupImg.jpg";
 import { useDispatch } from "react-redux";
 import { sendSignupRequest } from "../redux/LoginSignupState/actions";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
-  const dispatch=useDispatch()
+  const [passwordMatchError, setPasswordMatchError] = useState(false);
+  const [showPassInfoDiv, setShowPassInfoDiv] = useState(false);
+  const dispatch = useDispatch();
 
   const [signupData, setSignupData] = useState({
     firstname: "",
@@ -16,8 +19,8 @@ const Signup = () => {
     email: "",
     mobile: 0,
     password: "",
-    repassword:"",
-    login:false
+    repassword: "",
+    login: false,
   });
 
   const handleSigupFormChange = (e) => {
@@ -27,9 +30,19 @@ const Signup = () => {
       : setSignupData({ ...signupData, [name]: value });
   };
 
+  useEffect(() => {
+    if (signupData.password === signupData.repassword) {
+      setPasswordMatchError(false);
+    } else setPasswordMatchError(true);
+  }, [signupData]);
+
   const handleSignupFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendSignupRequest(signupData))
+    if (signupData.password !== signupData.repassword) {
+      setPasswordMatchError(true);
+    } else {
+      dispatch(sendSignupRequest(signupData));
+    }
   };
 
   console.log("signupdata", signupData);
@@ -45,6 +58,9 @@ const Signup = () => {
           id={styles.signupForm}
           onSubmit={(e) => handleSignupFormSubmit(e)}
         >
+          <p id={styles.passwordErrorPTag}>
+            {passwordMatchError ? "Password not match" : null}
+          </p>
           <label>First name:</label>
           <br />
           <input
@@ -55,7 +71,7 @@ const Signup = () => {
             required
             onChange={(e) => handleSigupFormChange(e)}
           />
-         
+
           <label>Second name:</label>
           <br />
           <input
@@ -66,7 +82,7 @@ const Signup = () => {
             required
             onChange={(e) => handleSigupFormChange(e)}
           />
-         
+
           <label>Email:</label>
           <br />
           <input
@@ -77,7 +93,7 @@ const Signup = () => {
             required
             onChange={(e) => handleSigupFormChange(e)}
           />
-         
+
           <label>Mobile no.</label>
           <br />
           <input
@@ -89,7 +105,7 @@ const Signup = () => {
             pattern="[0-9]{10}"
             onChange={(e) => handleSigupFormChange(e)}
           />
-          
+
           <label>Password:</label>
           <br />
           <div className={styles.passwordInputDiv}>
@@ -110,6 +126,29 @@ const Signup = () => {
             >
               {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
             </div>
+            <div
+              className={styles.infoIconDiv}
+              onMouseEnter={() => setShowPassInfoDiv(true)}
+              onMouseLeave={()=>setShowPassInfoDiv(false)}
+            >
+              <RiInformationLine />
+            </div>
+            {showPassInfoDiv ? (
+              <div className={styles.passInfoDiv}>
+                <p>
+                  Password should-
+                  <br />
+                  1-Numeric:[0-9],
+                  <br />
+                  2-Letters:[a-z],
+                  <br />
+                  3-Capital letters:[A-Z]
+                  <br />
+                  4-Special characters:[@$!%*?&]
+                  <br />
+                </p>
+              </div>
+            ) : null}
           </div>
           <label>Re-password:</label>
           <br />
@@ -132,7 +171,7 @@ const Signup = () => {
               {showRePassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
             </div>
           </div>
-          
+
           <button id={styles.signupBtn} type="submit">
             Submit
           </button>
