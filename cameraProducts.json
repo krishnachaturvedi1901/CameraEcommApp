@@ -978,7 +978,7 @@
       "mobile": 7355617820,
       "password": "aA1@abcd",
       "re-password": "aA1@abcd",
-      "login": false,
+      "login": true,
       "id": 2
     },
     {

@@ -23,6 +23,21 @@
     margin-bottom: 15px;
     width: 70%;
 }
+.loginPasswordDiv{
+    position: relative;
+}
+.loginPasswordDiv>input{
+    display: block;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 70%;
+}
+.showPassEyeDiv{
+    position: absolute;
+    left: 69%;
+    top: 55%;
+}
 #errorWarningPTag{
     color: red;
     margin: 10px;
@@ -41,6 +56,19 @@
 }
 #loginBtn:hover{
     background-color: darkslategray;
+    opacity: 1;
+}
+#logoutBtn{
+    padding: 8px 20px;
+    margin: 20px 0px;
+    cursor: pointer;
+    background-color: rgb(232, 30, 30);
+    color: whitesmoke;
+    border: none;
+   
+}
+#logoutBtn:hover{
+    background-color: rgb(196, 0, 0);
     opacity: 1;
 }
 #forgetPasswordBtn{
