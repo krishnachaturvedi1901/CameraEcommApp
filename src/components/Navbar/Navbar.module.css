@@ -22,6 +22,36 @@
     text-decoration: none;
     font-weight: 700;
 }
+.navListing:hover{
+    color: chocolate;
+}
+.loginAccountDiv{
+}
+.userImgDiv{
+    position: relative;
+    padding: 5px;
+}
+.userDropdownDiv{
+    position: absolute;
+    border: none;
+    background-color: darkslategray;
+    width: 100px;
+    height:fit-content;
+    top: 45px;
+    right:-36px;
+    padding: 10px 5px;
+}
+.userDropdownDiv>div:hover{
+   color: chocolate;
+   cursor: pointer;
+}
+.userImgDiv>img{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid rgb(34, 65, 65);
+}
 #cartButton{
     height: 42px;
     width: 42px;

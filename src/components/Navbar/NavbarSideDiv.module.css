@@ -20,6 +20,23 @@
     opacity: 0.7; /* Opacity of the background layer */
     z-index: -1
   }
+.userImgDiv>img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid rgb(34, 65, 65); 
+  }
+  .userImgDiv>h5{
+    color: whitesmoke;
+    text-transform: capitalize;
+    margin-top: 5px;
+  }
+  .lineDiv>p{
+    border-top: 2px solid black;
+    width: 80%;
+    text-align: center;
+  }
 .navSideDiv>div{
     margin: 10px;
 }
@@ -36,4 +53,7 @@
     text-decoration: none;
     font-weight: 700;
     cursor: pointer;
+}
+.navListing:hover{
+    color: chocolate;
 }

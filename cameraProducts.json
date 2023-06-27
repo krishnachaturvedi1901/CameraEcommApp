@@ -969,7 +969,7 @@
       "email": "kc123@gmail.com",
       "mobile": 7355617820,
       "password": "123@kc",
-      "login": false
+      "login": true
     },
     {
       "firstname": "Krishna",
@@ -978,7 +978,7 @@
       "mobile": 7355617820,
       "password": "aA1@abcd",
       "re-password": "aA1@abcd",
-      "login": true,
+      "login": false,
       "id": 2
     },
     {

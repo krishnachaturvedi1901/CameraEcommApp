@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
-import {GiHamburgerMenu} from "react-icons/gi"
+import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHamburger } from "react-icons/fa";
 import { BsCartX } from "react-icons/bs";
 import { BsCartCheck } from "react-icons/bs";
@@ -10,12 +10,16 @@ import { useContext } from "react";
 import { NavSidedivContext } from "../../context/NavSidedivContext";
 import { WindowWidthContext } from "../../context/WindowWidthContext";
 import { CartDivContext } from "../../context/CartSideDivContext";
+import { useSelector } from "react-redux";
+import fakeUserImage from "../../static/user.png";
 
 const Navbar = () => {
   const { toggleNavDivOpening } = useContext(NavSidedivContext);
   const { cartIsOpen, toggleCartOpening } = useContext(CartDivContext);
   const { windowWidth } = useContext(WindowWidthContext);
-  const {navDiv} =useContext(NavSidedivContext)
+  const { navDiv } = useContext(NavSidedivContext);
+  const { isLogin, payload } = useSelector((state) => state.LoginState);
+  const [navDropdownOpen, setNavDropdownOpen] = useState(false);
 
   const handleCartOpening = () => {
     console.log("cartIsopen chek in navbar", cartIsOpen);
@@ -26,18 +30,18 @@ const Navbar = () => {
 
   return windowWidth <= 500 ? (
     <div className={styles.navHamMainDiv}>
-      {!navDiv?<div
-        onClick={() => toggleNavDivOpening()}
-        className={styles.navHamburgerDiv}
-      >
-        <FaHamburger size={20} />
-      </div>:
-      <div
-       className={styles.navHamburgerDiv}
-      >
-       <GiHamburgerMenu size={20} />
-      </div>
-      }
+      {!navDiv ? (
+        <div
+          onClick={() => toggleNavDivOpening()}
+          className={styles.navHamburgerDiv}
+        >
+          <FaHamburger size={20} />
+        </div>
+      ) : (
+        <div className={styles.navHamburgerDiv}>
+          <GiHamburgerMenu size={20} />
+        </div>
+      )}
       {!cartIsOpen ? (
         <button id={styles.cartButton} onClick={() => handleCartOpening()}>
           <BsCartCheck size={24} color="white" />
@@ -61,10 +65,35 @@ const Navbar = () => {
             Products
           </Link>
         </div>
-        <div>
-          <Link to={"/login"} className={styles.navListing}>
-            Login
-          </Link>
+        <div className={styles.loginAccountDiv}>
+          {isLogin && payload ? (
+            <div
+              className={styles.userImgDiv}
+              onMouseEnter={() => setNavDropdownOpen(true)}
+              onMouseLeave={() => setNavDropdownOpen(false)}
+            >
+              <img src={fakeUserImage} alt="Account" />
+              {navDropdownOpen ? (
+                <div className={styles.userDropdownDiv}>
+                  <div>
+                    <b>Order</b>
+                  </div>
+                  <hr />
+                  <div>
+                    <b>Wishlist</b>
+                  </div>
+                  <hr />
+                  <div>
+                    <b>Account</b>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ) : (
+            <Link to={"/login"} className={styles.navListing}>
+              Login
+            </Link>
+          )}
         </div>
         {!cartIsOpen ? (
           <button id={styles.cartButton} onClick={() => handleCartOpening()}>
