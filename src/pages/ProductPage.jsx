@@ -110,8 +110,8 @@ const ProductPage = () => {
           {products
             ? products.map((prod) => {
                 return (
-                  <div className={styles.oneProductDivAndCartBtnDiv}>
-                    <WishlistHeartCompo  id={prod.id}  />
+                  <div className={styles.oneProductDivAndCartBtnDiv} key={prod.id} >
+                    <WishlistHeartCompo  product={prod} productId={prod.id}  />
                     <div
                       className={styles.oneProductDiv}
                       onClick={() => navigate(`/productDetail/${prod.id}`)}

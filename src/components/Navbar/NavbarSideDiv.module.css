@@ -32,7 +32,17 @@
     text-transform: capitalize;
     margin-top: 5px;
   }
+  .userImgDiv>h5:hover{
+    color:chocolate;
+    cursor: pointer;
+  }
+  .lineDiv{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
   .lineDiv>p{
+    margin: 0px;
     border-top: 2px solid black;
     width: 80%;
     text-align: center;

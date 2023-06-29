@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHamburger } from "react-icons/fa";
@@ -20,6 +20,7 @@ const Navbar = () => {
   const { navDiv } = useContext(NavSidedivContext);
   const { isLogin, payload } = useSelector((state) => state.LoginState);
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
+  const navigate=useNavigate()
 
   const handleCartOpening = () => {
     console.log("cartIsopen chek in navbar", cartIsOpen);
@@ -75,15 +76,15 @@ const Navbar = () => {
               <img src={fakeUserImage} alt="Account" />
               {navDropdownOpen ? (
                 <div className={styles.userDropdownDiv}>
-                  <div>
+                  <div onClick={()=>{navigate('/account/orders')}} >
                     <b>Order</b>
                   </div>
                   <hr />
-                  <div>
+                  <div onClick={()=>{navigate('/account/wishlist')}} >
                     <b>Wishlist</b>
                   </div>
                   <hr />
-                  <div>
+                  <div onClick={()=>{navigate('/account')}} >
                     <b>Account</b>
                   </div>
                 </div>

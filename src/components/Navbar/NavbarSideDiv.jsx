@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./NavbarSideDiv.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { NavSidedivContext } from "../../context/NavSidedivContext";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import fakeUserImage from "../../static/user.png";
 
 const NavbarSideDiv = () => {
+  const navigate=useNavigate()
   const navSideDivRef = useRef(null);
   const { navDiv, toggleNavDivOpening } = useContext(NavSidedivContext);
   const { isLogin, payload } = useSelector((state) => state.LoginState);
@@ -38,9 +39,9 @@ const NavbarSideDiv = () => {
           </Link>
         </button>
       ) : (
-        <div className={styles.userImgDiv}>
+        <div className={styles.userImgDiv} onClick={()=>{navigate("/account")}} >
           <img src={fakeUserImage} alt="Account" />
-          <h5>{payload.firstname} {payload.lastname}</h5>
+          <h5>{payload.firstname} {payload.lastname} &rarr; </h5>
         </div>
       )}
       <div className={styles.lineDiv} ><p></p></div>
@@ -55,14 +56,14 @@ const NavbarSideDiv = () => {
         </Link>
       </div>
       {isLogin && payload ? (
-        <div className={styles.navSideDivListingDiv}>
+        <div className={styles.navSideDivListingDiv} onClick={()=>navigate('/account/orders')} >
           <Link to={"/products"} className={styles.navListing}>
             Orders
           </Link>
         </div>
       ) : null}
       {isLogin && payload ? (
-        <div className={styles.navSideDivListingDiv}>
+        <div className={styles.navSideDivListingDiv} onClick={()=>navigate('/account/wishlist')} >
           <Link to={"/products"} className={styles.navListing}>
             Wishlist
           </Link>

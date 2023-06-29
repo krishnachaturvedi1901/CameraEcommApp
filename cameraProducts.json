@@ -1032,7 +1032,44 @@
       "id": 7
     }
   ],
-  "wishlists": [],
+  "wishlists": [
+    {
+      "productName": "Nikon D780 DSLR Camera with 24-120 mm Lens Kit",
+      "mrp": 180270,
+      "offerPrize": 108589,
+      "img_url": "https://www.reliancedigital.in/medias/Nikon-D5600-DSLR-Camera-with-18-55-mm-Lens-Kit-Black-491297412-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2ODM2MXxpbWFnZS9qcGVnfGltYWdlcy9oZjkvaDM0Lzg5NjMwNjUwODU5ODIuanBnfDNiODQ2M2ExMmJmNTQ0MzdjMGZmNmIxZjZmNThiZTJhMDY0OTk1YTY2MDRiMjY1NTliOGI0ZGFlMTkzZGVjOGQ",
+      "brand": "Nikon",
+      "feature": "4k Recording",
+      "model": "D7500",
+      "HDMI": "No",
+      "USB": "High Speed USB with Micro USB Connector",
+      "sensorType": "CMOS",
+      "batteryType": "Lithium ion (Li-ion)",
+      "lensType": "Standard",
+      "rating": 1.1,
+      "userId": 1,
+      "productId": 1,
+      "id": 1
+    },
+    {
+      "productName": "Nikon D780 DSLR Camera with 24-120 mm Lens Kit",
+      "mrp": 180270,
+      "offerPrize": 108589,
+      "img_url": "https://www.reliancedigital.in/medias/Nikon-D5600-DSLR-Camera-with-18-55-mm-Lens-Kit-Black-491297412-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2ODM2MXxpbWFnZS9qcGVnfGltYWdlcy9oZjkvaDM0Lzg5NjMwNjUwODU5ODIuanBnfDNiODQ2M2ExMmJmNTQ0MzdjMGZmNmIxZjZmNThiZTJhMDY0OTk1YTY2MDRiMjY1NTliOGI0ZGFlMTkzZGVjOGQ",
+      "brand": "Nikon",
+      "feature": "4k Recording",
+      "model": "D7500",
+      "HDMI": "No",
+      "USB": "High Speed USB with Micro USB Connector",
+      "sensorType": "CMOS",
+      "batteryType": "Lithium ion (Li-ion)",
+      "lensType": "Standard",
+      "rating": 1.1,
+      "userId": 1,
+      "productId": 1,
+      "id": 2
+    }
+  ],
   "carts": [],
   "orders": []
 }
