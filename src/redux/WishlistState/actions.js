@@ -12,74 +12,57 @@ export const wishlistAddingLoading = () => ({
   payload: {},
 });
 
-export const wishlistAddingSuccess = () => ({
+export const wishlistAddingSuccess = (data) => ({
   type: WISHLIST_ADDING_SUCCESS,
-  payload: {},
+  payload: data,
 });
 export const wishlistAddingError = () => ({
   type: WISHLIST_ADDING_ERROR,
   payload: {},
 });
-export const getAllWishlistProdSuccess = () => ({
+export const getAllWishlistProdSuccess = (data) => ({
   type: GET_ALL_WISHLIST_PROD_SUCCESS,
-  payload: {},
+  payload: data,
 });
 
 export const whishlistAddingRequest = (obj) => async (dispatch) => {
-  await checkProductAlreadyExistTemp(obj).then((res) => {
-    console.log("product geeting inside wishlistAddFuc", obj, res);
-  })
-  .catch((err)=>console.log(err))
-
-  axios
-    .post(wishlistApiUrl, obj)
+  dispatch(wishlistAddingLoading())
+  axios.post(wishlistApiUrl, obj) 
     .then((res) => {
       console.log("res after wishlist add req-", res);
+      if( res.status== 201 && res.statusText== 'Created'){ 
+        console.log("Just before getAllreq inside wishlistAff func userId-",obj.userId)
+        dispatch(getAllWishlistProducts({userId:obj.userId}))
+        dispatch(wishlistAddingSuccess(res.data))
+      }
+      else{dispatch(wishlistAddingError())}
     })
     .catch((err) => {
       console.log("error after wishlist add request", err);
     });
 };
 
-const checkProductAlreadyExistTemp = ({ userId, productId }) => {
-  axios(`${wishlistApiUrl}?productId=${productId}&userId=${userId}`)
-    .then((res) => {
-      console.log("res after wishlist get one prodTemp req-", res);
-      return res.data ? true : false;
-    })
-    .catch((err) => {
-      console.log("error after wishlist get one prodTemp req", err);
-    });
-};
 
-export const checkProductAlreadyExist = ({ userId, productId }) => (
-  dispatch
-) => {
-  axios(`${wishlistApiUrl}?productId=${productId}&userId=${userId}`)
-    .then((res) => {
-      console.log("res after wishlist get one prod req-", res);
-      return res.data ? true : false;
-    })
-    .catch((err) => {
-      console.log("error after wishlist get one prod req", err);
-    });
-};
-
-export const getAllWishlistProducts = () => (dispatch) => {
-  axios(wishlistApiUrl)
+export const getAllWishlistProducts = ({userId}) => (dispatch) => {
+  axios(`${wishlistApiUrl}?userId=${userId}`)
     .then((res) => {
       console.log("res after wishlist get all prod req-", res);
+      dispatch(getAllWishlistProdSuccess(res.data))
     })
     .catch((err) => {
       console.log("error after wishlist get all prod req", err);
     });
 };
 
-export const deleteWishlistProduct = (id) => (dispatch) => {
+export const deleteWishlistProduct = ({wishlistId,userId}) => (dispatch) => {
+  console.log("Id getting inside delete func-", wishlistId,"userId-",userId)
   axios
-    .delete(`${wishlistApiUrl}/${id}`)
+    .delete(`${wishlistApiUrl}/${wishlistId}`)
     .then((res) => {
       console.log("res after wishlist delete prod req-", res);
+      if(res.status==200 && res.statusText=="OK"){
+        dispatch(getAllWishlistProducts({userId}))
+      }
     })
     .catch((err) => {
       console.log("error after wishlist delete prod req", err);

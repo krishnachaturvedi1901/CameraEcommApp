@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { GiShoppingCart } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHamburger } from "react-icons/fa";
 import { BsCartX } from "react-icons/bs";

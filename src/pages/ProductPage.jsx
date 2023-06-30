@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productPageState/actions";
 import styles from "../styles/ProductPage.module.css";
@@ -12,13 +12,15 @@ import { GiShoppingCart } from "react-icons/gi";
 import ScrollToTopBtn from "../components/ProductPageCompo/ScrollToTopBtn";
 import { YaxisContext } from "../context/WindowYaxisContext";
 import WishlistHeartCompo from "../components/ProductPageCompo/WishlistHeartCompo";
+import { getAllWishlistProducts, whishlistAddingRequest } from "../redux/WishlistState/actions";
 
 const ProductPage = () => {
+  const [productsReload,setProductsReload]=useState(false)
   const { ycordinates } = useContext(YaxisContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const { isLogin, payload } = useSelector((state) => state.LoginState);
   let { loading, products, totalProducts, error } = useSelector(
     (state) => state.ProductState
   );
@@ -26,6 +28,9 @@ const ProductPage = () => {
   let sortingState = useSelector((state) => state.SortingState);
   let searchingState = useSelector((state) => state.SearchingState);
   let filteringState = useSelector((state) => state.FilteringState);
+  const { wishlistProducts } = useSelector(
+    (state) => state.WishlistGetAllProductState
+  );
 
   // console.log("-------->", products, totalProducts);
   // console.log("---->paginationState", paginationState);
@@ -47,6 +52,9 @@ const ProductPage = () => {
         ...filteringState,
       })
     );
+    if (isLogin && payload) {
+      dispatch(getAllWishlistProducts({ userId: payload.id }));
+    }
   }, [paginationState, sortingState, searchingState, filteringState]);
 
   // useEffect(() => {
@@ -59,7 +67,6 @@ const ProductPage = () => {
   useEffect(() => {
     const updateUrl = () => {
       let param = new URLSearchParams(searchParams);
-      console.log("****Param*******-", param, _page);
       if (_page) {
         param.set("_page", _page);
         param.set("_limit", _limit);
@@ -87,6 +94,13 @@ const ProductPage = () => {
     updateUrl();
   }, [paginationState, sortingState, searchingState, filteringState]);
 
+
+  useEffect(()=>{
+    console.log("reload of pp accours------------->")
+    setProductsReload(!productsReload)
+  },[wishlistProducts])
+
+
   if (loading) {
     return <h2>Loading ...</h2>;
   } else if (error) {
@@ -110,8 +124,16 @@ const ProductPage = () => {
           {products
             ? products.map((prod) => {
                 return (
-                  <div className={styles.oneProductDivAndCartBtnDiv} key={prod.id} >
-                    <WishlistHeartCompo  product={prod} productId={prod.id}  />
+                  <div
+                    className={styles.oneProductDivAndCartBtnDiv}
+                    key={prod.id}
+                  >
+                    <WishlistHeartCompo
+                      productObj={prod}
+                      productIdTemp={prod.id}
+                      // handleAddToWishlist={handleAddToWishlist}
+                      // handleRemoveFromWishlist={handleRemoveFromWishlist}
+                    />
                     <div
                       className={styles.oneProductDiv}
                       onClick={() => navigate(`/productDetail/${prod.id}`)}

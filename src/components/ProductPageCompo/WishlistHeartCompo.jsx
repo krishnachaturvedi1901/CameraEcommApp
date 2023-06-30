@@ -7,50 +7,54 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   checkProductAlreadyExist,
+  deleteWishlistProduct,
+  getAllWishlistProducts,
   whishlistAddingRequest,
 } from "../../redux/WishlistState/actions";
 import { useNavigate } from "react-router-dom";
 
-const WishlistHeartCompo = ({ product , productId }) => {
+const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
+  const [ productInWishlist,setProductInWishlist ]=useState({})
+  const [product,setProduct]=useState({})
+  const [productId,setProductId]=useState()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLogin, payload } = useSelector((state) => state.LoginState);
   const [toWishlist, setToWishlist] = useState(false);
-  const { loading, wishlisted, error, wishlist } = useSelector(
+  const { loading, wishlisted, error, wishlistedProduct } = useSelector(
     (state) => state.WishlistState
-  );
-  // let prodId = product.id;
-  // product.productId = product.id;
+    );
+    const { wishlistProducts } = useSelector(
+      (state) => state.WishlistGetAllProductState
+      );
 
-  console.log("product-", product);
-
-  console.log(
-    "State Inside wishlistheartComp-",
-    loading,
-    wishlisted,
-    error,
-    wishlist
-  );
+  useEffect(()=>{
+   if(productObj){setProduct(productObj)}
+    if(productIdTemp){setProductId(productIdTemp)}
+  },[])
 
   useEffect(() => {
-    delete product.id;
-    if (isLogin && payload) {
-      dispatch(
-        checkProductAlreadyExist({
-          userId: payload.id,
-          productId: product.productId,
-        })
-      );
+    if (isLogin && payload && wishlistProducts) {
+      const productExist = wishlistProducts.filter((prod) => {
+        return productObj.id === prod.productId;
+      });
+      if(productExist.length > 0){
+        setProductInWishlist(productExist[0])
+        setToWishlist(true);
+      }else{
+        setToWishlist(false)
+      }
     }
-  }, []);
+  }, [wishlistProducts]);
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = ({ product, userId, productId }) => {
+    delete product.id;
     if (isLogin && payload) {
       dispatch(
         whishlistAddingRequest({
           ...product,
-          userId: payload.id,
-          productId: productId,
+          userId,
+          productId,
         })
       );
     } else {
@@ -58,14 +62,42 @@ const WishlistHeartCompo = ({ product , productId }) => {
     }
   };
 
+  const handleRemoveFromWishlist = () => {
+    console.log("Remove from wishlist called");
+    if (isLogin && payload) {
+      dispatch(
+        deleteWishlistProduct({wishlistId:productInWishlist.id,userId:payload.id})
+      );
+    } else {
+      navigate("/login");
+    }
+
+  };
+
   return (
-    <div className={styles.wishlistHeartDiv} onClick={()=>handleAddToWishlist()}>
-      {!wishlisted ? (
-        <AiOutlineHeart size={20} />
+    <>
+      {!toWishlist ? (
+        <div
+          className={styles.wishlistHeartDiv}
+          onClick={() =>
+            handleAddToWishlist({
+              product,
+              userId: payload.id,
+              productId: productId,
+            })
+          }
+        >
+          <AiOutlineHeart size={20} />
+        </div>
       ) : (
-        <AiFillHeart size={20} color="red" />
+        <div
+          className={styles.wishlistHeartDiv}
+          onClick={() => handleRemoveFromWishlist()}
+        >
+          <AiFillHeart size={20} color="red" />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

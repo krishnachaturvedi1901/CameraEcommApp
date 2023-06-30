@@ -42,9 +42,9 @@ const Filteration = () => {
     setSelectedLenstype(selectedLenstypeArr)
   }
   
-  console.log("brand->",selectedBrand)
-  console.log("feature->",selectedFeature)
-  console.log("battery->",selectedBattery)
+  // console.log("brand->",selectedBrand)
+  // console.log("feature->",selectedFeature)
+  // console.log("battery->",selectedBattery)
 
 
   useEffect(()=>{

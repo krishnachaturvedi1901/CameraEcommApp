@@ -4,20 +4,29 @@ const WishlistReducer=(state={
     loading:false,
     wishlisted:false,
     error:false,
-    wishlist:[]
+    wishlistedProduct:{}
 },{type,payload})=>{
     switch (type) {
         case WISHLIST_ADDING_LOADING:
-            return{loading:true,wishlisted:false,error:false,wishlist:[]}
+            return{loading:true,wishlisted:false,error:false}
         case WISHLIST_ADDING_SUCCESS:
-            return{loading:false,wishlisted:true,error:false,wishlist:[]}
+            return{loading:false,wishlisted:true,error:false,wishlistedProduct:payload}
         case WISHLIST_ADDING_ERROR:
-            return{loading:false,wishlisted:false,error:true,wishlist:[]}
-        case GET_ALL_WISHLIST_PROD_SUCCESS:
-            return{loading:false,wishlisted:false,error:false,wishlist:payload}
+            return{loading:false,wishlisted:false,error:true}
         default:
             return state
     }
 }
 
-export {WishlistReducer}
+const WishlistGetAllProductReducer=(state={
+    wishlistProducts:[]
+},{type,payload})=>{
+    switch (type) {
+        case GET_ALL_WISHLIST_PROD_SUCCESS:
+            return{wishlistProducts:payload}
+        default:
+            return state
+    }
+}
+
+export {WishlistReducer,WishlistGetAllProductReducer}

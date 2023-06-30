@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import ProductReducer from "./productPageState/reducer";
 import { filteringReducer, paginationReducer, searchingReducer, sortingReducer } from "./pageSortFilterState/reducer";
 import { LoginReducer, SignupReducer } from "./LoginSignupState/reducer";
-import { WishlistReducer } from "./WishlistState/reducer";
+import { WishlistGetAllProductReducer, WishlistReducer } from "./WishlistState/reducer";
 
 const rootReducer=combineReducers({
   ProductState:ProductReducer,
@@ -13,7 +13,8 @@ const rootReducer=combineReducers({
   FilteringState:filteringReducer,
   LoginState:LoginReducer,
   SignupState:SignupReducer,
-  WishlistState:WishlistReducer
+  WishlistState:WishlistReducer,
+  WishlistGetAllProductState:WishlistGetAllProductReducer
 })
 const middlewares=applyMiddleware(thunk)
 
