@@ -25,15 +25,24 @@ const Wishlist = () => {
 
   };
 
+  const handleAddToCart=({product})=>{
+    delete product.id
+    product.quantity=1
+    if(isLogin){
+
+    }
+
+  }
+
   return (
     <div className={styles.wishlistMainDiv}>
       <div className={styles.allWishlistProdDiv}>
         {wishlistProducts ? (
           wishlistProducts.map((prod) => (
-            <div className={styles.oneWishlistProdDiv} onClick={()=>navigate(`/productDetail/${prod.productId}`)} > 
-              <img src={prod.img_url} />
+            <div className={styles.oneWishlistProdDiv}  > 
+              <img src={prod.img_url} onClick={()=>navigate(`/productDetail/${prod.productId}`)} />
               <div className={styles.oneProdSubAndDeleteBtnDiv}  >
-                <div className={styles.oneProdSubDiv}>
+                <div className={styles.oneProdSubDiv} onClick={()=>navigate(`/productDetail/${prod.productId}`)} >
                   <p>
                     {prod.brand}-{prod.model}
                   </p>
@@ -51,7 +60,9 @@ const Wishlist = () => {
                   >
                     <AiOutlineDelete size={30} color="white" />
                   </button>
-                  <button className={styles.wishlistAddToCartBtn} >
+                  <button className={styles.wishlistAddToCartBtn} 
+                   onClick={()=>handleAddToCart({product:prod})}
+                  >
                     <GiShoppingCart size={30} color="white" />
                   </button>
                 </div>

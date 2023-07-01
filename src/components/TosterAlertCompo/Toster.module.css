@@ -1,0 +1,41 @@
+.tosterMainDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 180px;
+    padding: 8px;
+    border: 3px solid rgb(7, 100, 114);
+    border-radius: 6px;
+    background-color: rgba(37, 120, 120, 0.8);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    position: fixed;
+    z-index: 2;
+    text-transform: capitalize;
+    bottom: 10px;
+    left: 50%;
+    
+    transition: transform 0.5s ease;
+    transform: translateY(0);
+}
+
+.tosterMainDiv.animate {
+    /* Animation effect */
+    animation: moveUpAndDown 1s ease-in-out infinite;
+  }
+
+@keyframes moveUpAndDown {
+    0% {
+      transform: translateY(50px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }

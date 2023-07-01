@@ -1,18 +1,58 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
-import styles from "../styles/ProductDetail.module.css"
+import styles from "../styles/ProductDetail.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { BsFillHeartFill } from "react-icons/bs";
+import { whishlistAddingRequest } from "../redux/WishlistState/actions";
+const productsApiUrl = process.env.REACT_APP_PRODUCTS_API_URL;
 
 const ProductDetail = () => {
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const { isLogin, payload } = useSelector((state) => state.LoginState);
+  const [toWishlist, setToWishlist] = useState(false);
+  const { wishlistProducts } = useSelector(
+    (state) => state.WishlistGetAllProductState
+  );
+
   console.log(product);
   useEffect(() => {
-    axios(`http://localhost:3001/products/${id}`)
+    axios(`${productsApiUrl}/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, [id]);
+
+  useEffect(() => {
+    if (isLogin && payload && wishlistProducts) {
+      const productExist = wishlistProducts.filter((prod) => {
+        return id == prod.productId;
+      });
+      if (productExist.length > 0) {
+        setToWishlist(true);
+      } else {
+        setToWishlist(false);
+      }
+    }
+  }, [wishlistProducts]);
+
+  const handleAddToWishlist = ({ product, userId, productId }) => {
+    delete product.id;
+    if (isLogin && payload) {
+      dispatch(
+        whishlistAddingRequest({
+          ...product,
+          userId,
+          productId,
+        })
+      );
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div className={styles.pdMainDiv}>
@@ -70,8 +110,25 @@ const ProductDetail = () => {
           </p>
           <h2>Offer price: Rs.{product.offerPrize}</h2>
         </div>
-        <div className={styles.pdWishlistCartButtonDiv} >
-          <button>Add to wishlist</button>
+        <div className={styles.pdWishlistCartButtonDiv}>
+          {isLogin && toWishlist ? (
+            <button style={{ backgroundColor: "chocolate" }}>
+              <BsFillHeartFill color="white" /> Wishlisted
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                handleAddToWishlist({
+                  product,
+                  userId: payload.id,
+                  productId: product.id,
+                })
+              }
+            >
+              Add to wishlist
+            </button>
+          )}
+
           <button>Add to cart</button>
         </div>
       </div>

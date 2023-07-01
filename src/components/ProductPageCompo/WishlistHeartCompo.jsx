@@ -12,6 +12,7 @@ import {
   whishlistAddingRequest,
 } from "../../redux/WishlistState/actions";
 import { useNavigate } from "react-router-dom";
+import Toster from "../TosterAlertCompo/Toster";
 
 const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
   const [ productInWishlist,setProductInWishlist ]=useState({})
@@ -21,12 +22,15 @@ const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
   const dispatch = useDispatch();
   const { isLogin, payload } = useSelector((state) => state.LoginState);
   const [toWishlist, setToWishlist] = useState(false);
-  const { loading, wishlisted, error, wishlistedProduct } = useSelector(
-    (state) => state.WishlistState
+  const { wishlistProducts } = useSelector(
+    (state) => state.WishlistGetAllProductState
     );
-    const { wishlistProducts } = useSelector(
-      (state) => state.WishlistGetAllProductState
-      );
+  let [alertMessage,setAlertMessage]=useState("")
+  const [alert,setAlert]=useState(false)
+
+    // const { loading, wishlisted, error, wishlistedProduct } = useSelector(
+    //   (state) => state.WishlistState
+    //   );
 
   useEffect(()=>{
    if(productObj){setProduct(productObj)}
@@ -57,6 +61,13 @@ const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
           productId,
         })
       );
+      setAlert(true)
+      setAlertMessage("Added to wishlist")
+      const timeout=setTimeout(()=>{
+        setAlert(false)
+        clearTimeout(timeout)
+      },1000)
+  
     } else {
       navigate("/login");
     }
@@ -68,6 +79,13 @@ const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
       dispatch(
         deleteWishlistProduct({wishlistId:productInWishlist.id,userId:payload.id})
       );
+      setAlert(true)
+      setAlertMessage("Removed from wishlist")
+      const timeout=setTimeout(()=>{
+        setAlert(false)
+        clearTimeout(timeout)
+      },1000)
+
     } else {
       navigate("/login");
     }
@@ -88,6 +106,7 @@ const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
           }
         >
           <AiOutlineHeart size={20} />
+          {alert?<Toster message={alertMessage} />:null}
         </div>
       ) : (
         <div
@@ -95,6 +114,7 @@ const WishlistHeartCompo = ({ productObj, productIdTemp  }) => {
           onClick={() => handleRemoveFromWishlist()}
         >
           <AiFillHeart size={20} color="red" />
+          {alert?<Toster message={alertMessage} />:null}
         </div>
       )}
     </>

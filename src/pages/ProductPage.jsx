@@ -13,6 +13,7 @@ import ScrollToTopBtn from "../components/ProductPageCompo/ScrollToTopBtn";
 import { YaxisContext } from "../context/WindowYaxisContext";
 import WishlistHeartCompo from "../components/ProductPageCompo/WishlistHeartCompo";
 import { getAllWishlistProducts, whishlistAddingRequest } from "../redux/WishlistState/actions";
+import Toster from "../components/TosterAlertCompo/Toster";
 
 const ProductPage = () => {
   const [productsReload,setProductsReload]=useState(false)
@@ -31,6 +32,8 @@ const ProductPage = () => {
   const { wishlistProducts } = useSelector(
     (state) => state.WishlistGetAllProductState
   );
+  let [alertMessage,setAlertMessage]=useState("")
+  let [alert,setAlert]=useState(false)
 
   // console.log("-------->", products, totalProducts);
   // console.log("---->paginationState", paginationState);
@@ -107,6 +110,16 @@ const ProductPage = () => {
     return <h2>Error while fetch ! Referesh</h2>;
   }
 
+  const handleCartBtnClick=()=>{
+    setAlert(true)
+    setAlertMessage("Cart Button Clicked")
+    const timeout=setTimeout(()=>{
+      setAlert(false)
+      clearTimeout(timeout)
+    },1000)
+
+  }
+
   return (
     <div className={styles.productPageMainDiv}>
       <div className={styles.sortingFilterDiv}>
@@ -120,6 +133,7 @@ const ProductPage = () => {
         <p>
           Total Products:<span>{totalProducts}</span>
         </p>
+        
         <div className={styles.productsDiv}>
           {products
             ? products.map((prod) => {
@@ -149,7 +163,8 @@ const ProductPage = () => {
                     <div className={styles.buyNowAndCartBtnDiv}>
                       <button
                         id={styles.cartBtn}
-                        onClick={() => console.log("CartBtn clicked")}
+                        // onClick={() => console.log("CartBtn clicked")}
+                        onClick={()=>{handleCartBtnClick()}}
                       >
                         <GiShoppingCart size={30} color="white" />
                       </button>
@@ -160,6 +175,7 @@ const ProductPage = () => {
                         Buy now
                       </button>
                     </div>
+                    {alert?<Toster message={alertMessage}/>:null}
                   </div>
                 );
               })
