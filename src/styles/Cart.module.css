@@ -7,4 +7,129 @@
     top: 0px;
     background-color: rgb(61, 92, 92);
     z-index: 1;
+    
+}
+.allWishlistProdDiv{
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+.oneWishlistProdDiv{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-bottom: 1px solid darkslategray;
+    width: 70%;
+    padding: 5px;
+    margin: 20px auto;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 6px;
+}
+.oneWishlistProdDiv>img{
+    height: 150px;
+    width: 150px;
+    margin-right: 35px;
+}
+.oneProdSubAndDeleteBtnDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.oneProdSubDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:flex-start;
+    text-align: start;
+    width: 80%;
+    
+}
+.oneProdSubDiv *{
+    margin: 5px; 
+    font-size: 16px;  
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.wishlistDeleteAndCartBtn{
+    position: relative;
+    width: 60px;
+    height: 40px;
+    padding: 0px;
+    margin: 5px;
+}
+.wishlistDeleteBtn{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: chocolate;
+    border: none;
+    margin-right: 15px;
+    padding: 7px;
+    border-radius: 6px;
+    cursor: pointer;
+
+}
+.wishlistAddToCartBtn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgb(55, 104, 104);
+    border: none;
+    padding: 7px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.wishlistDeleteBtn:hover{
+    background-color: rgb(235, 61, 13);
+    box-shadow: 1px 1px 1px red;
+}
+.wishlistAddToCartBtn:hover{
+    background-color: darkslategray;
+    box-shadow: 1px 1px 1px rgb(0, 6, 1);
+}
+
+@media screen and (max-width:1100px){
+    .cartMainDiv{
+        width: 50%;
+    }
+    .allWishlistProdDiv{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+    }
+    #cartImgId{
+        height: 100px;
+        width: 100px;
+    }
+    .oneWishlistProdDiv{
+        flex-direction: column;
+        border-right: 1px solid darkslategray;
+    }
+    .oneProdSubAndDeleteBtnDiv{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .oneProdSubDiv{
+        width: 100%;
+    }
+    .oneProdSubDiv *{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width:700px){
+    .cartMainDiv{
+        width: 70%;
+    }
+    .allWishlistProdDiv{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .oneWishlistProdDiv{
+        border-right: 1px solid darkslategray;
+        margin:10px auto
+    }
+    .oneProdSubDiv *{
+        font-size: 12px;
+    }
+
 }

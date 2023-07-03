@@ -6,7 +6,7 @@ const Toster = ({message}) => {
   useEffect(()=>{
    const timeout=setTimeout(()=>{
         setShowToster(false)
-    },3000)
+    },1000)
     return(()=>{
         clearInterval(timeout)
     })

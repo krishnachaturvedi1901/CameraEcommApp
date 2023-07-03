@@ -14,6 +14,7 @@ import { YaxisContext } from "../context/WindowYaxisContext";
 import WishlistHeartCompo from "../components/ProductPageCompo/WishlistHeartCompo";
 import { getAllWishlistProducts, whishlistAddingRequest } from "../redux/WishlistState/actions";
 import Toster from "../components/TosterAlertCompo/Toster";
+import { checkInCartFunction, updateInCartFunction } from "../redux/CartState/action";
 
 const ProductPage = () => {
   const [productsReload,setProductsReload]=useState(false)
@@ -32,14 +33,9 @@ const ProductPage = () => {
   const { wishlistProducts } = useSelector(
     (state) => state.WishlistGetAllProductState
   );
+  const {cartLoading,cartAdded,cartError}=useSelector((state)=>state.AddToCartState)
   let [alertMessage,setAlertMessage]=useState("")
   let [alert,setAlert]=useState(false)
-
-  // console.log("-------->", products, totalProducts);
-  // console.log("---->paginationState", paginationState);
-  // console.log("---->sortingState", sortingState);
-  // console.log("---->searchingState", searchingState);
-  // console.log("---->filteringState", filteringState);
 
   let { _page, _limit } = paginationState;
   let { brand, feature } = filteringState;
@@ -110,9 +106,20 @@ const ProductPage = () => {
     return <h2>Error while fetch ! Referesh</h2>;
   }
 
-  const handleCartBtnClick=()=>{
+  const handleCartBtnClick=({productId,product})=>{
+    if(isLogin && payload){
+      dispatch(checkInCartFunction({productId,userId:payload.id,product}))
+      console.log("dispatched checkInCartFunction")
+    }else{
+      AlertFunction("Login to use cart")
+    }
+    if(cartAdded){AlertFunction("Added to cart")}
+    else if(cartError){AlertFunction("Error while adding to cart! Try again")}
+  }
+
+  const AlertFunction=(message)=>{
     setAlert(true)
-    setAlertMessage("Cart Button Clicked")
+    setAlertMessage(message)
     const timeout=setTimeout(()=>{
       setAlert(false)
       clearTimeout(timeout)
@@ -164,7 +171,7 @@ const ProductPage = () => {
                       <button
                         id={styles.cartBtn}
                         // onClick={() => console.log("CartBtn clicked")}
-                        onClick={()=>{handleCartBtnClick()}}
+                        onClick={()=>{handleCartBtnClick({productId:prod.id,product:prod})}}
                       >
                         <GiShoppingCart size={30} color="white" />
                       </button>

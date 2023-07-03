@@ -4,6 +4,7 @@ import ProductReducer from "./productPageState/reducer";
 import { filteringReducer, paginationReducer, searchingReducer, sortingReducer } from "./pageSortFilterState/reducer";
 import { LoginReducer, SignupReducer } from "./LoginSignupState/reducer";
 import { WishlistGetAllProductReducer, WishlistReducer } from "./WishlistState/reducer";
+import { AddToCartReducer, GetAllCartProductReducer } from "./CartState/reducer";
 
 const rootReducer=combineReducers({
   ProductState:ProductReducer,
@@ -14,7 +15,9 @@ const rootReducer=combineReducers({
   LoginState:LoginReducer,
   SignupState:SignupReducer,
   WishlistState:WishlistReducer,
-  WishlistGetAllProductState:WishlistGetAllProductReducer
+  WishlistGetAllProductState:WishlistGetAllProductReducer,
+  AddToCartState:AddToCartReducer,
+  GetAllCartProductsState:GetAllCartProductReducer
 })
 const middlewares=applyMiddleware(thunk)
 
