@@ -1,135 +1,241 @@
-.cartMainDiv{
-    height: 100%;
-    width: 40%;
-    padding-top: 40px;
-    position: fixed;
-    right: 0px;
-    top: 0px;
-    background-color: rgb(61, 92, 92);
+.cartMainDiv {
+  height: 100%;
+  width: 40%;
+  padding-top: 40px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  background-color: rgb(61, 92, 92);
+  z-index: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.cartMainDiv::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+.quantityDiv{
+    position: sticky;
+    top: 30px;
     z-index: 1;
-    
-}
-.allWishlistProdDiv{
-    overflow-y: auto;
-    scroll-behavior: smooth;
-}
-.oneWishlistProdDiv{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    border-bottom: 1px solid darkslategray;
-    width: 70%;
-    padding: 5px;
-    margin: 20px auto;
-    cursor: pointer;
-    background-color: white;
-    border-radius: 6px;
-}
-.oneWishlistProdDiv>img{
-    height: 150px;
-    width: 150px;
-    margin-right: 35px;
-}
-.oneProdSubAndDeleteBtnDiv{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: cadetblue;
+    border-bottom: 2px solid black;
+    width: 85%;
+    margin:40px auto 10px;
+    color: whitesmoke;
 }
-.oneProdSubDiv{
+.quantityDiv>p{
+    margin: 10px;
+}
+.allWishlistProdDiv {
+    padding-bottom: 80px;
+}
+.oneWishlistProdDiv {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid darkslategray;
+  width: 85%;
+  padding: 5px;
+  margin: 20px auto;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 6px;
+}
+.oneWishlistProdDiv > img {
+  height: 150px;
+  width: 150px;
+  margin-right: 10px;
+}
+.oneProdSubAndDeleteBtnDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.oneProdSubDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: start;
+  width: 70%;
+}
+.quantityAndTotalpriceDiv{
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
-    align-items:flex-start;
-    text-align: start;
-    width: 80%;
+}
+.oneProdSubDiv * {
+  margin: 5px;
+  font-size: 14px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.wishlistDeleteAndCartBtn {
+  position: relative;
+  width: 60px;
+  height: 120px;
+  padding: 0px;
+  margin: 5px;
+}
+.wishlistDeleteBtn {
+  position: absolute;
+  left: 25%;
+  top: 0;
+  background-color: chocolate;
+  border: none;
+  margin-right: 15px;
+  padding: 7px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.wishlistAddToCartBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+}
+.wishlistAddToCartBtn > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: none;
+  border: none;
+  padding: 0px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.wishlistAddToCartBtn > strong {
+  margin: 4px;
+  padding-bottom: 3px;
+}
+.wishlistDeleteBtn:hover {
+  background-color: rgb(235, 61, 13);
+  box-shadow: 1px 1px 1px red;
+}
+#minusBtn:hover {
+  background-color: pink;
+}
+#plusBtn:hover {
+  background-color: palegreen;
+}
+
+.cartTotalAndCheckoutDiv{
+    position: sticky;
+    bottom: 40px;
+    width: 100%;
+    background-color: rgb(95, 158, 160,0);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 5px;
+    margin: auto;
+    height: 90px;
+    border-bottom: 2px solid black;
     
 }
-.oneProdSubDiv *{
-    margin: 5px; 
-    font-size: 16px;  
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.cartTotalDiv{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 6px;
+    background-color: rgb(95, 158, 160,0.5);
+    width: 85%;
+    margin: auto ;
+    color: whitesmoke;
+
 }
-.wishlistDeleteAndCartBtn{
-    position: relative;
-    width: 60px;
-    height: 40px;
-    padding: 0px;
-    margin: 5px;
+.cartTotalDiv>p{
+    margin: 4px 10px;
 }
-.wishlistDeleteBtn{
-    position: absolute;
-    left: 0;
-    top: 0;
+
+.checkoutBtn{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
     background-color: chocolate;
-    border: none;
-    margin-right: 15px;
-    padding: 7px;
-    border-radius: 6px;
-    cursor: pointer;
-
+    border-bottom: 2px solid black;
+    width: 85%;
+    margin: 5px auto 10px;
+    color: whitesmoke;
+    font-size: 16px;
+    text-transform: uppercase;
+  
 }
-.wishlistAddToCartBtn{
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: rgb(55, 104, 104);
-    border: none;
-    padding: 7px;
-    border-radius: 6px;
+.checkoutBtn:hover{
+    background-color:rgb(172, 78, 10);
     cursor: pointer;
 }
-.wishlistDeleteBtn:hover{
-    background-color: rgb(235, 61, 13);
-    box-shadow: 1px 1px 1px red;
+
+@media screen and (max-width: 1100px) {
+  .cartMainDiv {
+    width: 50%;
+  }
+  .allWishlistProdDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #cartImgId {
+    height: 100px;
+    width: 100px;
+  }
+  .oneWishlistProdDiv {
+    flex-direction: column;
+    border-right: 1px solid darkslategray;
+  }
+  .oneProdSubAndDeleteBtnDiv {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .oneProdSubDiv {
+    width: 100%;
+  }
+  .oneProdSubDiv * {
+    font-size: 13px;
+  }
+  .wishlistDeleteAndCartBtn {
+    height: 40px;
+    width: 80%;
+  }
+  .wishlistDeleteBtn{
+    left:0px
+  }
+  .wishlistAddToCartBtn {
+    top: 0px;
+    right: 0px;
+  }
 }
-.wishlistAddToCartBtn:hover{
-    background-color: darkslategray;
-    box-shadow: 1px 1px 1px rgb(0, 6, 1);
+@media screen and (max-width: 700px) {
+  .cartMainDiv {
+    width: 70%;
+  }
+  .allWishlistProdDiv {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .oneWishlistProdDiv {
+    border-right: 1px solid darkslategray;
+    margin: 10px auto;
+  }
+  .oneProdSubDiv * {
+    font-size: 12px;
+  }
 }
 
-@media screen and (max-width:1100px){
-    .cartMainDiv{
-        width: 50%;
-    }
-    .allWishlistProdDiv{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        
-    }
-    #cartImgId{
-        height: 100px;
-        width: 100px;
-    }
-    .oneWishlistProdDiv{
+@media screen and (max-width: 350px){
+    .quantityDiv{
         flex-direction: column;
-        border-right: 1px solid darkslategray;
     }
-    .oneProdSubAndDeleteBtnDiv{
-        flex-direction: column;
-        justify-content: space-between;
+    .quantityDiv>p{
+        margin: 3px;
     }
-    .oneProdSubDiv{
-        width: 100%;
-    }
-    .oneProdSubDiv *{
-        font-size: 14px;
-    }
-}
-@media screen and (max-width:700px){
-    .cartMainDiv{
-        width: 70%;
-    }
-    .allWishlistProdDiv{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-    .oneWishlistProdDiv{
-        border-right: 1px solid darkslategray;
-        margin:10px auto
-    }
-    .oneProdSubDiv *{
-        font-size: 12px;
-    }
-
 }

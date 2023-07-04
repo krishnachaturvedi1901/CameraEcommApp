@@ -15,6 +15,7 @@ import WishlistHeartCompo from "../components/ProductPageCompo/WishlistHeartComp
 import { getAllWishlistProducts, whishlistAddingRequest } from "../redux/WishlistState/actions";
 import Toster from "../components/TosterAlertCompo/Toster";
 import { checkInCartFunction, updateInCartFunction } from "../redux/CartState/action";
+import { AlertContext } from "../context/AlertContext";
 
 const ProductPage = () => {
   const [productsReload,setProductsReload]=useState(false)
@@ -34,9 +35,7 @@ const ProductPage = () => {
     (state) => state.WishlistGetAllProductState
   );
   const {cartLoading,cartAdded,cartError}=useSelector((state)=>state.AddToCartState)
-  let [alertMessage,setAlertMessage]=useState("")
-  let [alert,setAlert]=useState(false)
-
+  const {alert,alertMessage,AlertFunction}=useContext(AlertContext)
   let { _page, _limit } = paginationState;
   let { brand, feature } = filteringState;
   let { _sort, _order } = sortingState;
@@ -117,15 +116,6 @@ const ProductPage = () => {
     else if(cartError){AlertFunction("Error while adding to cart! Try again")}
   }
 
-  const AlertFunction=(message)=>{
-    setAlert(true)
-    setAlertMessage(message)
-    const timeout=setTimeout(()=>{
-      setAlert(false)
-      clearTimeout(timeout)
-    },1000)
-
-  }
 
   return (
     <div className={styles.productPageMainDiv}>
@@ -163,9 +153,9 @@ const ProductPage = () => {
                       <img src={prod.img_url} />
                       <h4>{prod.productName}</h4>
                       <p>
-                        M.R.P: <span>{prod.mrp}</span>
+                        M.R.P: <span> &#8377;{prod.mrp}</span>
                       </p>
-                      <h4>Offer Price: {prod.offerPrize}</h4>
+                      <h4>Offer Price: &#8377; {prod.offerPrize}</h4>
                     </div>
                     <div className={styles.buyNowAndCartBtnDiv}>
                       <button

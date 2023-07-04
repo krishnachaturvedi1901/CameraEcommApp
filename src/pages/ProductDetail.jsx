@@ -6,6 +6,10 @@ import styles from "../styles/ProductDetail.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillHeartFill } from "react-icons/bs";
 import { whishlistAddingRequest } from "../redux/WishlistState/actions";
+import { checkInCartFunction } from "../redux/CartState/action";
+import { useContext } from "react";
+import { AlertContext } from "../context/AlertContext";
+import Toster from "../components/TosterAlertCompo/Toster";
 const productsApiUrl = process.env.REACT_APP_PRODUCTS_API_URL;
 
 const ProductDetail = () => {
@@ -15,11 +19,12 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const { isLogin, payload } = useSelector((state) => state.LoginState);
   const [toWishlist, setToWishlist] = useState(false);
+  const {alert,alertMessage,AlertFunction}=useContext(AlertContext)
+  const {cartLoading,cartAdded,cartError}=useSelector((state)=>state.AddToCartState)
   const { wishlistProducts } = useSelector(
     (state) => state.WishlistGetAllProductState
   );
 
-  console.log(product);
   useEffect(() => {
     axios(`${productsApiUrl}/${id}`)
       .then((res) => setProduct(res.data))
@@ -33,6 +38,7 @@ const ProductDetail = () => {
       });
       if (productExist.length > 0) {
         setToWishlist(true);
+        AlertFunction("Added to wishlist")
       } else {
         setToWishlist(false);
       }
@@ -50,9 +56,22 @@ const ProductDetail = () => {
         })
       );
     } else {
-      navigate("/login");
+      AlertFunction("Please login to use wishlist feature")
+      
     }
   };
+
+  const handleCartBtnClick=()=>{
+    if(isLogin && payload){
+      dispatch(checkInCartFunction({productId:id,userId:payload.id,product}))
+      console.log("dispatched checkInCartFunction")
+    }else{
+      AlertFunction("Login to use cart")
+    }
+    if(cartAdded){AlertFunction("Added to cart")}
+    else if(cartError){AlertFunction("Error while adding to cart! Try again")}
+  }
+
 
   return (
     <div className={styles.pdMainDiv}>
@@ -129,8 +148,9 @@ const ProductDetail = () => {
             </button>
           )}
 
-          <button>Add to cart</button>
+          <button onClick={()=>handleCartBtnClick()} >Add to cart</button>
         </div>
+        {alert?<Toster message={alertMessage} />:null}
       </div>
     </div>
   );

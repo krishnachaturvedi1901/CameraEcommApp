@@ -9,6 +9,7 @@ import Signup from "../pages/Signup";
 import Account from "../pages/Account";
 import Orders from "../pages/Orders";
 import Wishlist from "../pages/Wishlist";
+import Checkout from "../pages/Checkout";
 
 const AllRoutes = () => {
   // let routes=useRoutes([
@@ -25,7 +26,9 @@ const AllRoutes = () => {
         <Route path="orders" element={<Orders />} />
         <Route path="wishlist" element={<Wishlist />} />
       </Route>
+      <Route path="/checkout" element={<Checkout/>} />
       <Route path="*" element={<NotFound />} />
+
     </Routes>
   );
 };

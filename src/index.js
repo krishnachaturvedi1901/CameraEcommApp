@@ -10,6 +10,7 @@ import WindowWidthContextProvider from './context/WindowWidthContext';
 import WindowYaxisContextProvider from './context/WindowYaxisContext';
 import CartSideDivContextProvider from './context/CartSideDivContext';
 import AuthcontextProvider from './context/Authcontext';
+import { AlertContextProvider } from './context/AlertContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
   
   <WindowYaxisContextProvider>
   <WindowWidthContextProvider>
+  <AlertContextProvider>
   <AuthcontextProvider>
   <CartSideDivContextProvider>
   <NavSidedivContextProvider>
@@ -26,6 +28,7 @@ root.render(
   </NavSidedivContextProvider>
   </CartSideDivContextProvider>
   </AuthcontextProvider>
+  </AlertContextProvider>
   </WindowWidthContextProvider>
   </WindowYaxisContextProvider>
   </Provider>

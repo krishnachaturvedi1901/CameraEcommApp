@@ -37,9 +37,9 @@ export const checkInCartFunction=({productId,userId,product})=>(dispatch)=>{
     .then((res)=>{
       console.log("res after checkInCart-",res.data)
       if(res.data.length!=0){
-        dispatch(updateInCartFunction({cartId:res.data[0].id,quantity:res.data[0].quantity+1}))
+        dispatch(updateInCartFunction({cartId:res.data[0].id,quantity:res.data[0].quantity+1,totalPrice:res.data[0].totalPrice+res.data[0].offerPrize}))
       }else {
-        dispatch(addToCartFunction({...productDash,productId,userId,quantity:1}))
+        dispatch(addToCartFunction({...productDash,productId,userId,quantity:1,totalPrice:productDash.offerPrize}))
       }
       
     })
@@ -49,9 +49,9 @@ export const checkInCartFunction=({productId,userId,product})=>(dispatch)=>{
     })
 }
 
-export const updateInCartFunction=({cartId,quantity})=>(dispatch)=>{
+export const updateInCartFunction=({cartId,quantity,totalPrice})=>(dispatch)=>{
     console.log("in updatecartfunc",cartId,quantity)
-  axios.patch(`${cartApiUrl}/${cartId}`,{quantity})
+  axios.patch(`${cartApiUrl}/${cartId}`,{quantity,totalPrice})
   .then((res)=>{
     console.log("res after updateInCart-",res.data)
     dispatch(getAllProductsFromCartFunction(res.data.userId))
